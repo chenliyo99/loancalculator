@@ -1,0 +1,77 @@
+/**
+ * @license Copyright 2013 - 2014 Intel Corporation All Rights Reserved.
+ *
+ * The source code, information and material ("Material") contained herein is owned by Intel Corporation or its
+ * suppliers or licensors, and title to such Material remains with Intel Corporation or its suppliers or
+ * licensors. The Material contains proprietary information of Intel or its suppliers and licensors. The
+ * Material is protected by worldwide copyright laws and treaty provisions. No part of the Material may be used,
+ * copied, reproduced, modified, published, uploaded, posted, transmitted, distributed or disclosed in any way
+ * without Intel's prior express written permission. No license under any patent, copyright or other intellectual
+ * property rights in the Material is granted to or conferred upon you, either expressly, by implication,
+ * inducement, estoppel or otherwise. Any license under such intellectual property rights must be express and
+ * approved by Intel in writing.
+ *
+ * Unless otherwise agreed by Intel in writing, you may not remove or alter this notice or any other notice
+ * embedded in Materials by Intel or Intel's suppliers or licensors in any way.
+ */
+ 
+/** Button Image Properties */
+.idr-button-image {
+  margin-top: 10px;
+  text-align: center;
+  margin-bottom: 3px;
+  height: 100%;
+}
+
+.idr-button-image img{
+    height: auto;
+    max-width: 100%;
+    max-height: 80%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+    display: block;
+}
+
+.idr-button-image span{
+  width: 100%;
+  color: inherit;
+  text-align: center;
+  font-weight: bold;
+  display: block;
+}
+
+.idr-button-image .idr-button-image-none {
+    max-height: 80%;
+}
+
+.idr-button-image .idr-button-image-circle {
+  -webkit-clip-path: circle(50%,50%,35%);
+}
+
+.idr-button-image .idr-button-image-rounded-box {
+  border-radius: 20%;
+}
+
+
+.idr-button-image .idr-button-image-star {
+   -webkit-clip-path: polygon(50% 0%, 37% 36%, 1% 38%, 28% 62%, 19% 100%, 50% 79%, 81% 100%, 72% 62%, 99% 38%, 63% 36%, 50% 0%);
+}
+
+.idr-button-image .idr-button-image-heart {
+  
+}
+
+/** Button Anchor Properties */
+.idr-button-anchor.anchor
+{
+	text-decoration: underline !important;
+	text-align: center;
+	width: 100%;
+}
+
+#afui .button {
+    height: 100%;
+}

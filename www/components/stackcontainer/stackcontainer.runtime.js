@@ -1,0 +1,17 @@
+/**
+ * @license Copyright 2013 - 2014 Intel Corporation All Rights Reserved.
+ *
+ * The source code, information and material ("Material") contained herein is owned by Intel Corporation or its
+ * suppliers or licensors, and title to such Material remains with Intel Corporation or its suppliers or
+ * licensors. The Material contains proprietary information of Intel or its suppliers and licensors. The
+ * Material is protected by worldwide copyright laws and treaty provisions. No part of the Material may be used,
+ * copied, reproduced, modified, published, uploaded, posted, transmitted, distributed or disclosed in any way
+ * without Intel's prior express written permission. No license under any patent, copyright or other intellectual
+ * property rights in the Material is granted to or conferred upon you, either expressly, by implication,
+ * inducement, estoppel or otherwise. Any license under such intellectual property rights must be express and
+ * approved by Intel in writing.
+ *
+ * Unless otherwise agreed by Intel in writing, you may not remove or alter this notice or any other notice
+ * embedded in Materials by Intel or Intel's suppliers or licensors in any way.
+ */
+goog.provide("idr.runtime.StackContainer"),goog.require("idr.runtime.ComponentRuntime"),goog.require("idr.components.StackContainerBase"),idr.runtime.StackContainer=function(id,data,parent){idr.components.StackContainerBase.call(this,id,data,parent),this.initializeRuntime(data),this.loadCss("stackcontainer","stackcontainer.runtime.css"),this._view=null,this.addPropertyChangedHandler("height",function(){this.Parent.updateChildComponentHeight(this,this.height())}),this.addPropertyChangedHandler("padding",function(){$(this._view).css("padding",this.padding())}),parent.addChildComponentLoaded(this)},goog.inherits(idr.runtime.StackContainer,idr.components.StackContainerBase),goog.mixin(idr.runtime.StackContainer.prototype,idr.runtime.ComponentRuntime.prototype),idr.runtime.StackContainer.prototype.render=function(){null===this._view&&(this._view=$('<div class="idr-container-stack"/>'),this._view.css("padding",this.padding()))},idr.runtime.StackContainer.prototype.view=function(){return null===this._view&&this.render(),this._view},idr.runtime.StackContainer.prototype.componentDeleted=function(){this._view.remove(),idr.components.StackContainerBase.prototype.componentDeleted.call(this)},idr.runtime.StackContainer.prototype.reorderChildrens=function(childId,newIndex){idr.components.StackContainerBase.prototype.reorderChildrens.call(this,childId,newIndex)},idr.runtime.StackContainer.prototype.onChildrenAdded=function(child){var childrenDecorated=$('<div class="idr-stack-item"><div>');childrenDecorated.attr("data-child",child.Id),childrenDecorated.append(child.view()),this._view.append(childrenDecorated)},idr.runtime.StackContainer.prototype.onChildrenRemoved=function(child){var childrenWrapperDiv=this._view.find('[data-child="'+child.Id+'"]');childrenWrapperDiv.remove()},idr.runtime.StackContainer.prototype.onChildrenReordered=function(childId,newIndex){var item=$(this._view).find("[data-child='"+childId+"']").detach();0===newIndex?$(this._view).prepend(item):$(this._view).find(".idr-stack-item:nth-child("+newIndex+")").after(item)},idr.runtime.StackContainer.prototype.parentComponentLoaded=function(){this.notifyComponentLoaded()};

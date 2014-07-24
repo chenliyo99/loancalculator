@@ -1,0 +1,207 @@
+/**
+ * @license Copyright 2013 - 2014 Intel Corporation All Rights Reserved.
+ *
+ * The source code, information and material ("Material") contained herein is owned by Intel Corporation or its
+ * suppliers or licensors, and title to such Material remains with Intel Corporation or its suppliers or
+ * licensors. The Material contains proprietary information of Intel or its suppliers and licensors. The
+ * Material is protected by worldwide copyright laws and treaty provisions. No part of the Material may be used,
+ * copied, reproduced, modified, published, uploaded, posted, transmitted, distributed or disclosed in any way
+ * without Intel's prior express written permission. No license under any patent, copyright or other intellectual
+ * property rights in the Material is granted to or conferred upon you, either expressly, by implication,
+ * inducement, estoppel or otherwise. Any license under such intellectual property rights must be express and
+ * approved by Intel in writing.
+ *
+ * Unless otherwise agreed by Intel in writing, you may not remove or alter this notice or any other notice
+ * embedded in Materials by Intel or Intel's suppliers or licensors in any way.
+ */
+
+#afui .idr-page-padding-none {
+    padding: 0px;
+}
+
+#afui .idr-page-padding-small {
+    padding: 6px;
+}
+
+#afui .idr-page-padding-medium {
+    padding: 15px;
+}
+
+#afui .idr-page-padding-large {
+    padding: 30px;
+}
+
+/* padding for page elements */
+#afui .stack-padding-none .idr-fluid-item {
+    padding: 0em;
+}
+
+#afui .stack-padding-small .idr-fluid-item {
+    padding: 0.2em;
+}
+
+#afui .stack-padding-medium .idr-fluid-item {
+    padding: 0.4em;
+}
+
+#afui .stack-padding-large .idr-fluid-item {
+    padding: 0.6em;
+}
+
+/* height property */
+
+.idr-height-10 {
+    height: 10%;
+}
+
+.idr-height-20 {
+    height: 20%;
+}
+
+.idr-height-25 {
+    height: 25%;
+}
+
+.idr-height-33 {
+    height: 33%;
+}
+
+.idr-height-50 {
+    height: 50%;
+}
+
+.idr-height-66 {
+    height: 66%;
+}
+
+.idr-height-75 {
+    height: 75%;
+}
+
+.idr-height-80 {
+    height: 80%;
+}
+
+.idr-height-100 {
+    height: 100%;
+}
+
+.idr-fluid-stack {
+    display: flex;
+    display: -webkit-flex;
+    flex-flow:  row wrap;
+    -webkit-flex-flow:  row wrap;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    align-items: flex-start;
+    -webkit-align-items: flex-start;
+    align-content: flex-start;
+    -webkit-align-content: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+.idr-fluid-stack .idr-grow-fixed {
+    flex-grow: 0;
+    -webkit-flex-grow: 0;
+}
+
+/* phone (portrait) default */
+
+.idr-fluid-stack .idr-fluid-item {
+
+}
+
+.idr-fluid-stack .idr-grow-fixed {
+    flex-grow: 0;
+    -webkit-flex-grow: 0;
+}
+
+.idr-fluid-stack .col-1 {
+    flex-basis: 50%;
+    -webkit-flex-basis: 50%;
+}
+
+.idr-fluid-stack .col-2 {
+    flex-basis: 100%;
+    -webkit-flex-basis: 100%;
+}
+
+/* phone landscape, tablets > 768px */
+@media (min-width: 480px), (min-width: 600px) {
+
+    .idr-fluid-stack .col-1,
+    .idr-fluid-stack .col-2 {
+        flex-basis: 100%;
+        -webkit-flex-basis: 100%;
+    }
+
+    .idr-fluid-stack .tab-phone-land-col-1 {
+        flex-basis: 33.333333%;
+        -webkit-flex-basis: 33.333333%;
+    }
+
+    .idr-fluid-stack .tab-phone-land-col-2 {
+        flex-basis: 66.666666%;
+        -webkit-flex-basis: 66.666666%;
+    }
+
+    .idr-fluid-stack .tab-phone-land-col-3 {
+        flex-basis: 100%;
+        -webkit-flex-basis: 100%;
+    }
+}
+
+/* tablets and desktop > 992px */
+@media (min-width: 800px) {
+
+    .idr-fluid-stack .col-1,
+    .idr-fluid-stack .col-2 {
+        flex-basis: 100%;
+        -webkit-flex-basis: 100%;
+    }
+
+    .idr-fluid-stack .tablet-land-col-1 {
+        flex-basis: 20%;
+        -webkit-flex-basis: 20%;
+    }
+
+    .idr-fluid-stack .tablet-land-col-2 {
+        flex-basis: 40%;
+        -webkit-flex-basis: 40%;
+    }
+
+    .idr-fluid-stack .tablet-land-col-3 {
+        flex-basis: 60%;
+        -webkit-flex-basis: 60%;
+    }
+
+    .idr-fluid-stack .tablet-land-col-4 {
+        flex-basis: 80%;
+        -webkit-flex-basis: 80%;
+    }
+
+    .idr-fluid-stack .tablet-land-col-5 {
+        flex-basis: 100%;
+        -webkit-flex-basis: 100%;
+    }
+}
+
+/* utils */
+
+#afui .nomargin {
+    margin: 0;
+}
+
+/* app framework fixes */
+/* TODO remove it after official implementation */
+
+#afui.android .header .backButton {
+    background: transparent;
+    height: auto;
+}
+
+#afui.android .header .backButton.button.pressed {
+    background: #33B5E5;
+    border-color: #33B5E5;
+}

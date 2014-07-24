@@ -1,0 +1,13 @@
+{
+  "reponame":"templates-loan-calculator",
+  "title":"Loan Calculator",
+  "tooltip":"A simple loan calculator application",
+  "description":"Use this template to create an app that calculates the monthly payment and interest for a fixed-rate loan, or use it as starting point to create your own calculator app. Customize the worksheet with your formulas and customize its pages with your user interface.",
+  "articleUrl":"https://software.intel.com/en-us/html5/articles/intel-xdk-template-loan-calculator",
+  "keywords":["Domain Calculator"],
+  "visible" : "true",
+  "highlights" : ["Worksheet", "Calculator"],
+  "appname": "demo.loancalculator",
+  "relname":"1.0.0",
+  "type": "appcreator"
+}

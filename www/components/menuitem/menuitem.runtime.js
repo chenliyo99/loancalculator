@@ -1,0 +1,17 @@
+/**
+ * @license Copyright 2013 - 2014 Intel Corporation All Rights Reserved.
+ *
+ * The source code, information and material ("Material") contained herein is owned by Intel Corporation or its
+ * suppliers or licensors, and title to such Material remains with Intel Corporation or its suppliers or
+ * licensors. The Material contains proprietary information of Intel or its suppliers and licensors. The
+ * Material is protected by worldwide copyright laws and treaty provisions. No part of the Material may be used,
+ * copied, reproduced, modified, published, uploaded, posted, transmitted, distributed or disclosed in any way
+ * without Intel's prior express written permission. No license under any patent, copyright or other intellectual
+ * property rights in the Material is granted to or conferred upon you, either expressly, by implication,
+ * inducement, estoppel or otherwise. Any license under such intellectual property rights must be express and
+ * approved by Intel in writing.
+ *
+ * Unless otherwise agreed by Intel in writing, you may not remove or alter this notice or any other notice
+ * embedded in Materials by Intel or Intel's suppliers or licensors in any way.
+ */
+goog.provide("idr.runtime.MenuItem"),goog.require("idr.runtime.ComponentRuntime"),goog.require("idr.components.MenuItemBase"),idr.runtime.MenuItem=function(id,data,parent){idr.components.MenuItemBase.call(this,id,data,parent),this.initializeRuntime(data),this._markup=null,this._previousFontFamily=null,this.addPropertyChangedHandler("title",function(){this._markup.find("a").text(this.title())}),this.addPropertyChangedHandler("icon",function(){var a=this._markup.find("a");a.removeClass().addClass("icon").addClass(this.icon())}),this.addPropertyChangedHandler("backgroundColor",function(){this._markup.css("background-color","#"+this.backgroundColor())}),this.addPropertyChangedHandler("fontSize",function(){this._markup.css("font-size",this.fontSize())}),this.addPropertyChangedHandler("fontColor",function(){this._markup.css("color","#"+this.fontColor()),this._markup.find("a").css("color","#"+this.fontColor()),this._markup.css("border-color","#"+this.fontColor())}),this.addPropertyChangedHandler("fontFamily",function(){this._markup.removeClass(this._previousFontFamily),this._markup.addClass(this.fontFamily()),this._previousFontFamily=this.fontFamily()})},goog.inherits(idr.runtime.MenuItem,idr.components.MenuItemBase),goog.mixin(idr.runtime.MenuItem.prototype,idr.runtime.ComponentRuntime.prototype),idr.runtime.MenuItem.prototype.render=function(){if(null===this._markup){var that=this;this._markup=$('<li><a class="icon '+this.icon()+'" href="#">'+this.title()+"</a></li>"),this._markup.click(function(){that.fireEvent("ONCLICK")}),this.backgroundColor()&&this._markup.css("background-color","#"+this.backgroundColor()),this.fontColor()&&(this._markup.css("color","#"+this.fontColor()),this._markup.find("a").css("color","#"+this.fontColor()),this._markup.css("border-color","#"+this.fontColor())),this.fontSize()&&this._markup.css("font-size",this.fontSize()),this.fontFamily()&&(this._markup.removeClass(this._previousFontFamily),this._markup.addClass(this.fontFamily()),this._previousFontFamily=this.fontFamily())}},idr.runtime.MenuItem.prototype.componentDeleted=function(){this._markup.remove(),idr.components.MenuItemBase.prototype.componentDeleted.call(this)},idr.runtime.MenuItem.prototype.view=function(){return null===this._markup&&this.render(),this._markup};

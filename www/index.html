@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!-- Copyright 2013 - 2014 Intel Corporation All Rights Reserved.                                                   -->
+<!--                                                                                                                -->
+<!-- The source code, information and material ("Material") contained herein is owned by Intel Corporation or its   -->
+<!-- suppliers or licensors, and title to such Material remains with Intel Corporation or its suppliers or          -->
+<!-- licensors. The Material contains proprietary information of Intel or its suppliers and licensors. The          -->
+<!-- Material is protected by worldwide copyright laws and treaty provisions. No part of the Material may be used,  -->
+<!-- copied, reproduced, modified, published, uploaded, posted, transmitted, distributed or disclosed in any way    -->
+<!-- without Intel's prior express written permission. No license under any patent, copyright or other intellectual -->
+<!-- property rights in the Material is granted to or conferred upon you, either expressly, by implication,         -->
+<!-- inducement, estoppel or otherwise. Any license under such intellectual property rights must be express and     -->
+<!-- approved by Intel in writing.                                                                                  -->
+<!--                                                                                                                -->
+<!-- Unless otherwise agreed by Intel in writing, you may not remove or alter this notice or any other notice       -->
+<!-- embedded in Materials by Intel or Intel's suppliers or licensors in any way.                                   -->
+
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="stylesheet" type="text/css" href="libs/appframework-2.1/build/css/icons.css" />
+    <link rel="stylesheet" type="text/css" href="libs/appframework-2.1/build/css/af.ui.css" />
+    
+    <link rel="stylesheet" href="libs/c3js/c3.css">
+
+    <title>Intel XDK App Creator - Live Preview</title>
+    <!-- jQuery -->
+    <script type="text/javascript" src="libs/jquery/jquery-1.9.1.min.js"></script>
+
+	<!-- AppFramework -->
+    <script type="text/javascript" charset="utf-8" src="libs/appframework-2.1/build/appframework.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="libs/appframework-2.1/build/jq.appframework.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="libs/appframework-2.1/build/ui/appframework.ui.min.js"></script>
+    <!-- AppFramework Plugins -->
+	<script type="text/javascript" src="libs/appframework-2.1/plugins/af.slidemenu.js"></script>
+          
+    <!--  C3JS Chart library -->
+    <script src="libs/c3js/d3.min.js"></script>
+    <script src="libs/c3js/c3.min.js"></script>
+        
+    <!-- IDR scripts -->
+    <script src="libs/closure-library/closure/goog/base.js"></script>
+
+    <script src="runtime.deps.js"></script>
+    <script src="program.js"></script>
+
+      <script type="text/javascript" src="runtime/runtime.js"></script>
+    <script type="text/javascript">
+
+        /**
+         * Function called by LivePreview controller when it receives a message from storyboard to create a new object.
+         * @param {string} strData JSON serialization of new component. The data must respect what is needed by the  'idr.runtime.ComponentRuntime.parse()' function.
+         */
+        function __livePreview_createObject(strData)
+        {
+            var instance = idr.components.ComponentBase.parse(strData);
+            instance.render();
+            _instances[instance.Id] = instance;
+        }
+        
+        function __livePreview_setSharedWorkbook(workbook)
+        {
+            if(window._binder)
+            {
+                window._binder.destroy();
+            }
+            
+            window._workbook = workbook;
+            window._binder = new idr.core.DefaultBinder(window._workbook);
+            idr.components.Component.Binder = window._binder;
+        }
+        
+        function __livePreview_loadBinder(data)
+        {
+            if(window._binder)
+            {
+                window._binder.destroy();
+            }
+            
+            window._binder = new idr.core.DefaultBinder(window._workbook);
+            window._binder.fromRawObject(data);
+            idr.components.Component.Binder = window._binder;
+        }
+        
+        /**
+         * Function called by LivePreview controller when it receives a message from storyboard to change a property.
+         * @param {string} strData JSON serialization property change data. Parsed object should have the form: { instanceId:, propertyName:, newValue:, oldValue:? }
+         */
+        function __livePreview_propertyChange(strData)
+        {
+            var data = JSON.parse(strData);
+            var instanceId = data.instanceId;
+            var propertyName = data.propertyName;
+            var newValue = data.newValue;
+            
+            var instance = _instances[instanceId];
+            instance.Binder.setProperty(instance, propertyName, newValue);
+        }
+        
+        /**
+         * Function called by LivePreview controller when it receives a message from storyboard to connect an event with an action.
+         * @param {string} strData JSON serialization for event data. Parsed object should have the form: { sourceId:, targetId:, event:, action: }
+         */
+        function __livePreview_eventConnected(strData)
+        {
+            var data = JSON.parse(strData);
+            
+            _instances[data.sourceId].connectEventToAction(data.event, data.action, _instances[data.targetId]);
+        }
+        
+        /**
+         * Function called by LivePreview controller when a component is deleted.
+         * @param {string} strData JSON serialization with deleted component's data. Parsed object should have the form: { instanceId: }
+         */
+        function __livePreview_deleteObject(strData)
+        {
+            var data = JSON.parse(strData);
+            _instances[data.instanceId].componentDeleted();
+            _instances[data.instanceId] = undefined;
+        }
+        
+        /**
+         * @param {string} strData JSON serialization with deleted component's data. Parsed object should have the form: { instanceId: }
+         */
+        function __livePreview_updateObjects(strData)
+        {
+            var data = JSON.parse(strData);
+            
+            // TODO change name
+            _instances[data.instanceId].reorderChildrens(data.childId, data.newIndex);
+        }
+        
+        /**
+         * @param {string} data.sourceComponentId
+         * @param {string} data.targetComponentId
+         * @param {string} data.sourceEvent
+         * @param {string} data.targetAction
+         */
+        function __livePreview_connectionDeleted(data)
+        {
+            var sourceComponent = _instances[data.sourceComponentId];
+            var targetComponent = _instances[data.targetComponentId];
+            sourceComponent.removeEventToAction(data.sourceEvent, data.targetAction, targetComponent);
+        }
+        
+        /**
+         * @param {string} data.pageId
+         */
+        function __livePreview_startPageChanged(data)
+        {
+            var data = JSON.parse(data);
+            idr.runtime.Page.updateStartPage(data.pageId);
+        }
+        
+        window.onunload = function() {
+            if(window._binder)
+            {
+                window._binder.destroy();
+            }
+            
+            for(var i = 0, len = _instances.length; i < len; i++)
+            {
+                _instances[i].componentDeleted();
+            }
+        }
+    </script>
+    
+  </head>
+  <body>
+    <div id="afui">
+        <div id="content">
+            <div title='' id='_emptyPage' class='panel' data-footer='none' data-header='none' selected="true">
+            </div>
+        </div>
+        <div id='headers'>
+        </div>
+        <nav id="side-menu"></nav>
+        <div id="hiddenMenu" style="display: none;"></div>
+    </div>
+  </body>
+</html>

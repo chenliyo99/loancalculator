@@ -1,0 +1,96 @@
+/**
+ * @license Copyright 2013 - 2014 Intel Corporation All Rights Reserved.
+ *
+ * The source code, information and material ("Material") contained herein is owned by Intel Corporation or its
+ * suppliers or licensors, and title to such Material remains with Intel Corporation or its suppliers or
+ * licensors. The Material contains proprietary information of Intel or its suppliers and licensors. The
+ * Material is protected by worldwide copyright laws and treaty provisions. No part of the Material may be used,
+ * copied, reproduced, modified, published, uploaded, posted, transmitted, distributed or disclosed in any way
+ * without Intel's prior express written permission. No license under any patent, copyright or other intellectual
+ * property rights in the Material is granted to or conferred upon you, either expressly, by implication,
+ * inducement, estoppel or otherwise. Any license under such intellectual property rights must be express and
+ * approved by Intel in writing.
+ *
+ * Unless otherwise agreed by Intel in writing, you may not remove or alter this notice or any other notice
+ * embedded in Materials by Intel or Intel's suppliers or licensors in any way.
+ */
+
+
+#afui .idr-chart-container {
+    display: block;
+    float: left;
+    min-height: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+#afui .idr-chart-container .idr-chart-title {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+#afui .idr-chart-container .idr-chart {
+    height: calc(100% - 2.5em);
+}
+
+#afui .idr-chart-container .idr-chart .idr-chart-canvas {
+    height: 100%;
+}
+
+#afui .idr-chart-notconfig {
+    width: 100%;
+    min-height: 15em;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    border: 1px solid #ccc;
+    padding: 0.25em;
+    background-image: url(../../assets/img/elements_chart_gray.png);
+}
+
+#afui .idr-chart-padding-none {
+    padding: 0em;
+}
+
+#afui .idr-chart-padding-small {
+    padding: 0.2em;
+}
+
+#afui .idr-chart-padding-medium {
+    padding: 0.4em;
+}
+
+#afui .idr-chart-padding-large {
+    padding: 0.6em;
+}
+
+/* custom styles for target OS */
+
+#afui.android .c3 path, 
+#afui.android .c3 line {
+    stroke: #ffffff;
+}
+
+#afui.android .c3-axis,
+#afui.android .c3-axis-y,
+#afui.android .c3-axis-x,
+#afui.android .c3-legend-item {
+    fill: #ffffff;
+}
+
+#afui.android .c3-tooltip {
+    color: #000000;
+}
+
+#afui.android.light .c3 path, 
+#afui.android.light .c3 line {
+    stroke: #000000;
+}
+
+#afui.android.light .c3-axis,
+#afui.android.light .c3-axis-y,
+#afui.android.light .c3-axis-x,
+#afui.android.light .c3-legend-item {
+    fill: #000000;
+}

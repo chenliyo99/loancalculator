@@ -1,0 +1,17 @@
+/**
+ * @license Copyright 2013 - 2014 Intel Corporation All Rights Reserved.
+ *
+ * The source code, information and material ("Material") contained herein is owned by Intel Corporation or its
+ * suppliers or licensors, and title to such Material remains with Intel Corporation or its suppliers or
+ * licensors. The Material contains proprietary information of Intel or its suppliers and licensors. The
+ * Material is protected by worldwide copyright laws and treaty provisions. No part of the Material may be used,
+ * copied, reproduced, modified, published, uploaded, posted, transmitted, distributed or disclosed in any way
+ * without Intel's prior express written permission. No license under any patent, copyright or other intellectual
+ * property rights in the Material is granted to or conferred upon you, either expressly, by implication,
+ * inducement, estoppel or otherwise. Any license under such intellectual property rights must be express and
+ * approved by Intel in writing.
+ *
+ * Unless otherwise agreed by Intel in writing, you may not remove or alter this notice or any other notice
+ * embedded in Materials by Intel or Intel's suppliers or licensors in any way.
+ */
+goog.provide("idr.components.BaseChart"),idr.components.BaseChart=function(viewSelector,showLegend,showAxis){this._chart=null,this._series=[],this._xAxis=[],this._viewSelector=viewSelector,this._showLegend=showLegend,this._showAxis=showAxis},Object.defineProperty(idr.components.BaseChart.prototype,"Chart",{get:function(){return this._chart}}),Object.defineProperty(idr.components.BaseChart.prototype,"ShowLegend",{set:function(showLegend){this._showLegend=showLegend},get:function(){return this._showLegend}}),Object.defineProperty(idr.components.BaseChart.prototype,"ShowAxis",{set:function(showAxis){this._showAxis=showAxis},get:function(){return this._showAxis}}),Object.defineProperty(idr.components.BaseChart.prototype,"ViewSelector",{set:function(viewSelector){this._viewSelector=viewSelector},get:function(){return this._viewSelector}}),idr.components.BaseChart.prototype.render=function(rawData){try{this.parseData(rawData),this.draw()}catch(error){}},idr.components.BaseChart.prototype.updateSerieRender=function(newItem){try{this.updateSerieItem(newItem),this.updateDraw(newItem)}catch(error){}},idr.components.BaseChart.prototype.redraw=function(){this.draw()},idr.components.BaseChart.prototype.showAxisTitle=function(show){this.ShowAxis=show,this.redraw()},idr.components.BaseChart.prototype.showLegendTitle=function(show){this.ShowLegend=show,this.ShowLegend?this._chart.legend.show():this._chart.legend.hide(),this._chart.flush()},idr.components.BaseChart.prototype.resize=function(){this._chart&&this._chart.resize()},idr.components.BaseChart.prototype.parseData=function(rawData){this._series=[];for(var serieKey in rawData){for(var serie=rawData[serieKey],serieEntry=[],i=0,len=serie.getCount();len>i;i++){var item=serie.get(i);serieEntry.push(item.value)}this._series[serieKey]=serieEntry}},idr.components.BaseChart.prototype.updateSerieItem=function(rawItem){var serie=this._series[rawItem.parentKey];if(serie){var oldItem=serie[rawItem.key];void 0!==oldItem&&(serie[rawItem.key]=rawItem.value)}},idr.components.BaseChart.prototype.draw=function(){},idr.components.BaseChart.prototype.udpateDraw=function(){};

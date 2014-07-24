@@ -1,0 +1,239 @@
+/**
+ * @license Copyright 2013 - 2014 Intel Corporation All Rights Reserved.
+ *
+ * The source code, information and material ("Material") contained herein is owned by Intel Corporation or its
+ * suppliers or licensors, and title to such Material remains with Intel Corporation or its suppliers or
+ * licensors. The Material contains proprietary information of Intel or its suppliers and licensors. The
+ * Material is protected by worldwide copyright laws and treaty provisions. No part of the Material may be used,
+ * copied, reproduced, modified, published, uploaded, posted, transmitted, distributed or disclosed in any way
+ * without Intel's prior express written permission. No license under any patent, copyright or other intellectual
+ * property rights in the Material is granted to or conferred upon you, either expressly, by implication,
+ * inducement, estoppel or otherwise. Any license under such intellectual property rights must be express and
+ * approved by Intel in writing.
+ *
+ * Unless otherwise agreed by Intel in writing, you may not remove or alter this notice or any other notice
+ * embedded in Materials by Intel or Intel's suppliers or licensors in any way.
+ */
+
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.idr-list-container {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.idr-editor-list-notconfig {
+    width: 100%;
+    min-height: 15em;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    border: 1px solid #ccc;
+    padding: 0.25em;
+    background-image: url(../../assets/img/elements_list_gray.png);
+}
+
+.idr-editor-list-notconfig p{
+    visibility: hidden
+}
+
+.idr-list, 
+.idr-list-col, 
+.idr-grid {
+    display: inline-block;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.idr-list-col .idr-item, 
+.idr-list .idr-item{
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+.idr-list .idr-item {
+    float: left;
+}
+                        
+.idr-grid .idr-item {
+    width: 50%;     
+    float: left;
+}
+
+/* list item formatting */
+
+#afui .idr-item.simple {
+    padding: 0.5em;
+}
+
+#afui .idr-item.nomargin {
+    padding: 0;
+}
+
+/* text formatting */
+
+#afui .idr-item .idr-item-text p {    
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#afui .idr-item .idr-item-text.title {
+    font-weight: bold;
+}
+
+#afui .idr-item .idr-item-text.large-title p {
+    margin: 0;
+    padding: 0;
+    font-size: large;
+    font-weight: bold;
+}
+
+#afui .idr-item .idr-item-text.subtitle p {
+    margin: 0;
+    padding: 0;
+    font-size: smaller;
+}
+
+.idr-list-container .idr-item .idr-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.idr-item .idr-item-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.idr-item .idr-item-image {
+    margin: 0;
+    padding: 0;
+    width: 4em;
+    min-height: 4em;
+    position: relative;
+}
+
+.idr-item .idr-item-container .text-group {
+    float: left;
+    width: calc(100% - 4em);
+    padding: 0.5em;
+}
+
+.idr-item .idr-item-container .idr-item-image {
+    float:left
+}
+
+#afui .idr-list-container .list {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+#afui .idr-list-container .list li{
+    margin-top:0.25em;
+}
+
+#afui .idr-list .list li:first-child {
+    border-top: 0px !important;
+}
+
+/* basic formatting */
+
+#afui .idr-list-padding-none {
+    padding: 0px;
+}
+
+#afui .idr-list-padding-small {
+    padding: 6px;
+}
+
+#afui .idr-list-padding-medium {
+    padding: 10px;
+}
+
+#afui .idr-list-padding-large {
+    padding: 15px;
+}
+
+#afui .idr-content-font-family-times {
+    font-family: "Times New Roman", Times, serif;
+}
+
+#afui .idr-content-font-family-arial {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#afui .idr-content-font-family-courier {
+    font-family: "Courier New", Courier, monospace;
+}
+
+#afui .idr-content-font-family-helvetica {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#afui .idr-content-font-family-georgia {
+    font-family: Georgia, Palatino, "Palatino Linotype", Times, "Times New Roman", serif;
+}
+
+#afui .idr-content-font-family-trebuchet {
+    font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", sans-serif;
+}
+
+#afui .idr-content-font-family-verdana {
+    font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+}
+
+#afui .idr-align-left .idr-item-text {
+    text-align: left;
+}
+
+#afui .idr-align-center .idr-item-text {
+    text-align: center;
+}
+
+#afui .idr-align-right .idr-item-text {
+    text-align: right;
+}
+
+#afui input[type=search]{
+    background: inherit;
+    color: inherit;
+}
+
+/* phone landscape */
+@media (min-width: 480px) {
+    
+    .idr-list .idr-item {
+        width: 50%;
+    }
+    
+    .idr-grid .idr-item {
+        width:  33.3333333%;
+    }
+}
+            
+/* tablets > 768px */
+@media (min-width: 768px) {
+    .idr-list .idr-item {
+        width: 100%;
+    }
+
+    .idr-grid .idr-item {
+        width:  33.3333333%;
+    }
+}
+
+/* tablets and desktop > 992px */
+@media (min-width: 992px) {
+
+    .idr-list .idr-item {
+        width: 33.3333333%;
+    }                
+
+    .idr-grid .idr-item {
+        width: 25%;
+    }
+}
